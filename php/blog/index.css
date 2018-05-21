@@ -1,0 +1,28 @@
+
+
+html { 
+    background: url(c.jpeg) no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
+
+  input:focus {
+    background-color: grey;
+  }
+
+  input[type = submit]
+  {
+     color: grey;
+  }
+
+  a:link{
+        color:black;
+  }
+  table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
