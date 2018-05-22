@@ -43,8 +43,8 @@ a {
 <form action="validation.php" method="post">
 
     <h1> Login</h1>
-    Name:
-    <input type="text" name="fname" value ="<?php echo $fname ?>" align="middle">
+    Email:
+    <input type="text" name="email" value ="<?php echo $email ?>" align="middle">
     <span class="error">* <?php echo $nameErr;?></span><br><br><br>
     Password:
     <input type="password" name = "password">
@@ -55,5 +55,7 @@ a {
 </form>
 <P>Not registered yet? <a href="test.php">Register here</a> </P>
 <?php include 'validation.php';?>
+<br><br>
+    <a href = "logout.php">Logout</a>
 </body>
 </html>
