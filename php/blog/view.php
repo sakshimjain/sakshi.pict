@@ -12,7 +12,11 @@ $password = "3135sakshi";
 $database = "BLOG";
 // Create connection
 $conn = new mysqli($servername, $username, $password , $database);
-
+if(empty($_SESSION["email"]))
+{
+    echo "Access denied";
+    exit;
+}
 
 
 
@@ -81,8 +85,8 @@ td {
     <h1>You did some awesome work !!</h1>
     <br><br><br>
     <?php
-        $a=$_SESSION["fname"];
-        $sql = "SELECT id FROM USER1 WHERE fname = '$a'";
+        $a=$_SESSION["email"];
+        $sql = "SELECT id FROM USER1 WHERE email = '$a'";
         $result = mysqli_query($conn, $sql);
         $row = mysqli_fetch_assoc($result);
         $q=$row["id"]; 
@@ -113,5 +117,7 @@ td {
      //  echo "</table>";
 
     ?>
+    <br><br>
+    <a href = "logout.php">Logout</a>
 </body>
 </html>
