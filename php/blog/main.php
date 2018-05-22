@@ -14,7 +14,11 @@ $password = "3135sakshi";
 $database = "BLOG";
 // Create connection
 $conn = new mysqli($servername, $username, $password , $database);
-
+if(empty($_SESSION["email"]))
+{
+    echo "Access denied";
+    exit;
+}
 
 ?>
 
@@ -98,6 +102,7 @@ td {
        
 
     ?>
-
+    <br><br>
+    <a href = "logout.php">Logout</a>
 </body>
 </html>
