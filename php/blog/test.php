@@ -17,6 +17,7 @@ $conn = new mysqli($servername, $username, $password , $database);
 // define variables and set to empty values
 $fnameErr = $emailErr = $snameErr = $websiteErr = "";
 $fname = $email = $sname = $role_id = $password = "";
+
 if ($_SERVER["REQUEST_METHOD"] == "POST")
 {
     if (empty($_POST["fname"])) {
