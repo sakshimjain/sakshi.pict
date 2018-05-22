@@ -17,12 +17,18 @@ $conn = new mysqli($servername, $username, $password , $database);
 // define variables and set to empty values
 $fnameErr = $emailErr = $snameErr = $websiteErr = "";
 $title = $content = $image = $role_id = $password = "";
-$a=$_SESSION["fname"];
-$sql = "SELECT id FROM USER1 WHERE fname = '$a'";
+if(empty($_SESSION["email"]))
+{
+    echo "Access denied";
+    exit;
+}
+$a=$_SESSION["email"];
+$sql = "SELECT id FROM USER1 WHERE email = '$a'";
 $result = mysqli_query($conn, $sql);
 $row = mysqli_fetch_assoc($result);
 $q=$row["id"]; 
 $_SESSION["id"]="$q";
+
 if ($_SERVER["REQUEST_METHOD"] == "POST")
 {
     if (empty($_POST["content"])) {
@@ -51,6 +57,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
         $nameErr = "";
     } else {
         $role_id = test_input($_POST["role_id"]);
+    }
+
+    if (empty($_POST["image"])) {
+        $nameErr = "";
+    } else {
+        $image = test_input($_POST["image"]);
     }
 
     $sql = "INSERT INTO POST1(content,image,title,create_date,update_date,user_id) VALUES ('$content','$image','$title',CURDATE(),NULL,'$q')";
@@ -108,7 +120,8 @@ a {
     <span class="error">* <?php echo $contentErr;?></span><br><br><br>
     Image: <input type="text" name="image" align="middle"><br><br><br>
     <input type="submit" name="Submits"><br><br><br>
-   
+    <br><br>
+    <a href = "logout.php">Logout</a>
 
 
   
