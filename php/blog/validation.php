@@ -10,12 +10,13 @@ if(isset($_REQUEST['submit']))
     $database = "BLOG";
 // Create connection
     $conn = new mysqli($servername, $username, $pswd , $database);
-    $fname = $_REQUEST['fname'];
+    $email = $_REQUEST['email'];
     $password = $_REQUEST['password'];
-    $_SESSION["fname"]="$fname";
+    $_SESSION["email"]="$email";
     $_SESSION["password"]="$password";
     $_SESSION["content"]="";
-    $sql =  "SELECT fname,password,role_id FROM USER1 WHERE fname = '$fname' and password = SHA1('$password')";
+    $_SESSION["role_id"]="$role_id";
+    $sql =  "SELECT email,password,role_id FROM USER1 WHERE email = '$email' and password = SHA1('$password')";
    // $sql = "SELECT password FROM USER1"
 
     $result = mysqli_query($conn, $sql);                            //The mysqli_query() function performs a query against the database
