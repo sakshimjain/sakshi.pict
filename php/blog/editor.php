@@ -6,6 +6,11 @@
  * Time: 6:22 PM
  */
 session_start();
+if(empty($_SESSION["email"]))
+{
+    echo "Access denied";
+    exit;
+}
 $servername = "localhost";                                      //connecting to sql
 $username = "root";
 $password = "3135sakshi";
@@ -79,15 +84,20 @@ td {
 <body>
     <h1>Something can be improved!!</h1>
     <br><br><br>
+    <a href = "write.php" class="red">Write here</a>
+    <a href = "view.php" class="green">View your post</a><br><br><br>
     <?php
-        $a=$_SESSION["fname"];
-        $sql = "SELECT id FROM USER1 WHERE fname = '$a'";
+        $a=$_SESSION["email"];
+        $sql = "SELECT id FROM USER1 WHERE email = '$a'";
         $result = mysqli_query($conn, $sql);
         $row = mysqli_fetch_assoc($result);
         $q=$row["id"]; 
-        $sql = "SELECT title,content,create_date,id FROM POST1";
+       
+
+        $sql = "SELECT title,content,create_date,id,user_id FROM POST1";
         $result = mysqli_query($conn,$sql);
         $row = mysqli_fetch_assoc($result);
+
         echo "<table border='1'>";
         echo "<tbody>";
         echo "<th>Title</th><th>Content</th><th>Date</th><th>Edit</th>";
@@ -97,7 +107,10 @@ td {
         echo "<td>".$row['create_date']."</td>";
            //echo "<td>"."<a href='edit.php" . "' />".Edit."</a>"."</td>";
          //  echo "<td>".'<a href="edit.php?id='$row['id'] . '" />".Edit."</a>"."</td>";
+         if($row['user_id']==$q)
+         {
          echo "<td>".'<a href="edit.php?id='.$row['id'].'">'.Edit.'</a>'."</td>";
+         }
            echo "</tr>";
        while( $row = mysqli_fetch_assoc($result))
        {
@@ -111,7 +124,11 @@ td {
            echo "<td>".$row['create_date']."</td>";
            //echo "<td>"."<a href='edit.php" . "' />".Edit."</a>"."</td>";
          //  echo "<td>".'<a href="edit.php?id='$row['id'] . '" />".Edit."</a>"."</td>";
-         echo "<td>".'<a href="edit.php?id='.$row['id'].'">'.Edit.'</a>'."</td>";
+         
+         if($row['user_id']==$q)
+         {
+            echo "<td>".'<a href="edit.php?id='.$row['id'].'">'.Edit.'</a>'."</td>";
+         }
            echo "</tr>";
            
           
@@ -121,6 +138,7 @@ td {
        echo "</table>";
 
     ?>
-
+    <br><br>
+    <a href = "logout.php">Logout</a>
 </body>
 </html>
