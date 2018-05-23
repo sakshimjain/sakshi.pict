@@ -6,7 +6,9 @@
  * Time: 6:22 PM
  */
 session_start();
-if(empty($_SESSION["email"]))
+
+
+if(empty($_SESSION["email"]) or $_SESSION["role_id"]=='1')
 {
     echo "Access denied";
     exit;
@@ -97,20 +99,17 @@ td {
         $sql = "SELECT title,content,create_date,id,user_id FROM POST1";
         $result = mysqli_query($conn,$sql);
         $row = mysqli_fetch_assoc($result);
-
+       
         echo "<table border='1'>";
         echo "<tbody>";
-        echo "<th>Title</th><th>Content</th><th>Date</th><th>Edit</th>";
+        echo "<th>Title</th><th>Content</th><th>Date</th>";
         echo "<tr>";
         echo "<td>".$row['title']."</td>";
         echo "<td>".$row['content']."</td>";
         echo "<td>".$row['create_date']."</td>";
            //echo "<td>"."<a href='edit.php" . "' />".Edit."</a>"."</td>";
          //  echo "<td>".'<a href="edit.php?id='$row['id'] . '" />".Edit."</a>"."</td>";
-         if($row['user_id']==$q)
-         {
-         echo "<td>".'<a href="edit.php?id='.$row['id'].'">'.Edit.'</a>'."</td>";
-         }
+        
            echo "</tr>";
        while( $row = mysqli_fetch_assoc($result))
        {
@@ -125,10 +124,7 @@ td {
            //echo "<td>"."<a href='edit.php" . "' />".Edit."</a>"."</td>";
          //  echo "<td>".'<a href="edit.php?id='$row['id'] . '" />".Edit."</a>"."</td>";
          
-         if($row['user_id']==$q)
-         {
-            echo "<td>".'<a href="edit.php?id='.$row['id'].'">'.Edit.'</a>'."</td>";
-         }
+        
            echo "</tr>";
            
           
@@ -136,7 +132,7 @@ td {
        }
        echo "</tbody>";
        echo "</table>";
-
+       
     ?>
     <br><br>
     <a href = "logout.php">Logout</a>
